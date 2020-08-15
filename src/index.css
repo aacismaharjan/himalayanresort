@@ -387,9 +387,17 @@ code {
   .section-heading .section-title {
     font-size: 2em;
   }
+
+  nav.navbar {
+    padding: 0.25em 1em;
+  }
+
+  .navbar .navbar-brand {
+    padding-right: 0em;
+  }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 340px) {
   .brand-title {
     display: none;
   }
