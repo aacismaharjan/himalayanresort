@@ -287,11 +287,11 @@ code {
 
 /* Featured Room */
 .featuredRoom {
-  padding: 3em 0;
+  padding-top: 3em;
 }
 
 .featuredRoom .row {
-  padding: 1em;
+  padding: 1em 0;
 }
 
 .featuredRoom .row > div {
@@ -389,7 +389,7 @@ code {
   }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 360px) {
   .brand-title {
     display: none;
   }
