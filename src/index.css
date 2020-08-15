@@ -1,13 +1,396 @@
+/* Bootstrap */
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
+
+/* Font-Awesome */
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css";
+
+/* Theme */
+:root {
+  --primary: "dodgerblue";
+}
+
+/* Custom Style */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Global */
+.btn {
+  border-radius: 0;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 0.15em;
+}
+
+.line {
+  border-width: 5px;
+  width: 10%;
+  margin: 1.5em auto;
+  border-color: dodgerblue;
+}
+
+.section-heading {
+  text-align: center;
+  padding-top: 1em;
+}
+
+.section-heading .section-title {
+  font-size: 2.5em;
+  margin-bottom: 0em;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.section-heading .line {
+  margin: 1em auto;
+}
+
+.room {
+  display: block;
+  position: relative;
+  width: inherit;
+  transition: 0.4s;
+  box-shadow: 5px 5px 6px 0px rgb(70 53 53 / 25%);
+}
+
+.room:hover {
+  box-shadow: 5px 5px 6px 0px rgb(70 53 53 / 50%);
+}
+
+.room .img-container {
+  position: relative;
+  transition: 0.4s;
+}
+
+.room .thumbnail-container {
+  min-height: 150px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.room img {
+  width: 100%;
+  min-height: inherit;
+  object-fit: cover;
+}
+
+.room .price-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background: #333;
+  letter-spacing: 0.1em;
+  padding: 0.75em;
+  font-size: 80%;
+  line-height: 1;
+  border-bottom-right-radius: 1.2em;
+}
+
+.room .price-tag p {
+  margin: 0;
+}
+
+.room .price-tag span {
+  font-size: 60%;
+  margin: 0;
+}
+
+.room .room-title {
+  text-transform: capitalize;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.2em;
+  padding: 0.5em 0;
+  color: #333;
+  font-size: 90%;
+  transition: 0.4s;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.room .btn-room {
+  font-size: 80%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.room:hover .btn-room {
+  opacity: 1;
+}
+
+.room:hover .room-title {
+  text-decoration: underline;
+}
+
+.room:hover .price-tag {
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.room .img-container::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.4s;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.room:hover .img-container::before {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Navbar */
+.navbar .container {
+  padding: 0.5em 0;
+}
+
+.navbar .navbar-brand {
+  padding-right: 2em;
+  letter-spacing: 0.05em;
+}
+
+.navbar li.nav-item {
+  margin-right: 1em;
+}
+
+.navbar .navbar-brand img {
+  margin-right: 0.25em;
+}
+
+/* Hero */
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("./assets/images/defaultBcg.jpeg") no-repeat center / cover;
+}
+
+.hero.mini-hero {
+  min-height: 70vh;
+}
+
+.hero .banner {
+  width: fit-content;
+  padding: 2em 3em;
+  margin: 1em;
+
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero .banner .banner-title {
+  text-transform: capitalize;
+  font-size: 4.25em;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.hero .banner .banner-subtitle {
+  font-size: 1.2em;
+  font-weight: normal;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.6em;
+}
+
+.hero .banner .btn {
+  min-width: 10em;
+}
+
+@media only screen and (max-width: 1000px) {
+  .hero .banner {
+    padding: 3em 2em;
+  }
+
+  .hero .banner .banner-title {
+    font-size: 3em;
+  }
+
+  .hero .banner .btn {
+    font-size: 80%;
+    min-width: 8em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .hero .banner {
+    padding: 3em 1.5em;
+    margin: 2em 0em !important;
+  }
+
+  .hero .banner .banner-title {
+    font-size: 2.75em;
+  }
+
+  .hero .banner .banner-subtitle {
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* Services */
+#services {
+  padding: 3em 0;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#services .row {
+  padding: 1em 0;
+}
+
+#services .row > div {
+  max-width: 300px;
+}
+
+#services .item {
+  text-align: center;
+  padding: 1em;
+}
+
+#services .item span {
+  font-size: 2.5em;
+}
+
+#services .item .item-title {
+  font-size: 1.25em;
+  margin: 0.75em 0;
+  text-transform: capitalize;
+}
+
+#services .item .item-desc {
+  font-size: 90%;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Featured Room */
+.featuredRoom {
+  padding: 3em 0;
+}
+
+.featuredRoom .row {
+  padding: 1em;
+}
+
+.featuredRoom .row > div {
+  margin: 1em 0;
+}
+
+/* Single Room */
+.single-room {
+  padding-bottom: 3em;
+}
+
+.room-img-showcase {
+  padding: 3em 0 2em 0;
+}
+
+.room-img-showcase img {
+  width: 100%;
+}
+
+.room-desc {
+  padding: 1em 0 2em 0;
+}
+
+.room-desc .details {
+  padding-bottom: 1em;
+}
+
+.room-desc .details h3 {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.room-desc .details p {
+  line-height: 1.6;
+  padding-right: 1em;
+}
+
+.room-desc .info h3 {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.room-desc .info h6 {
+  font-weight: normal;
+  margin-bottom: 1em;
+  font-size: 110%;
+  letter-spacing: 0.15em;
+}
+
+.room-extra ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+.room-extra {
+  margin-top: 1em;
+}
+
+.room-extra h4 {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.room-extra ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  letter-spacing: 0.05em;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-gap: 1em;
+}
+
+/* Rooms */
+.rooms {
+  padding: 1em 0;
+}
+.rooms .row {
+  padding: 1em 0;
+}
+
+.room-filter {
+  padding: 3em 0 1em 0;
+}
+
+.room-parameter {
+  padding-top: 2em;
+}
+
+@media only screen and (max-width: 600px) {
+  .section-heading .section-title {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .brand-title {
+    display: none;
+  }
 }
