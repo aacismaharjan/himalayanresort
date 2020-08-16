@@ -165,7 +165,7 @@ code {
 
 .navbar .navbar-brand {
   padding-right: 2em;
-  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .navbar li.nav-item {
@@ -178,6 +178,7 @@ code {
 
 /* Hero */
 .hero {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   padding-top: 72px;
@@ -192,9 +193,11 @@ code {
 }
 
 .hero .banner {
+  position: relative;
   width: fit-content;
   padding: 2em 3em;
   margin: 1em;
+  z-index: 99;
 
   text-align: center;
   color: white;
@@ -401,4 +404,15 @@ code {
   .brand-title {
     display: none;
   }
+}
+
+/* videobox */
+.videobox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
 }
