@@ -240,7 +240,7 @@ code {
 @media only screen and (max-width: 600px) {
   .hero .banner {
     padding: 3em 1.5em;
-    margin: 2em 0em !important;
+    margin: 2em auto;
   }
 
   .hero .banner .banner-title {
