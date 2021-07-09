@@ -5,7 +5,7 @@ import Badge from "@material-ui/core/Badge";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+import MuiCardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import Link from "next/link";
 const useStyles = makeStyles({
   root: {
     width: "100%",
+    boxShadow: "0px 0px 5px 5px rgba(0,0,0,0.05)",
   },
   badge: {
     height: "auto",
@@ -20,23 +21,40 @@ const useStyles = makeStyles({
     padding: "0.75rem",
     color: "white",
     transform: "translate(0px, 0px)",
-    color: "white",
     borderRadius: "0px 0px 10px 0",
     letterSpacing: "0.1rem",
   },
+  media: {
+    paddingTop: "56.25%" /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */,
+  },
 });
 
-export default function RoomCard() {
+export function CardMedia(props: any) {
+  const classes = useStyles();
+  return (
+    <MuiCardMedia
+      className={classes.media}
+      image={props.image || "/assets/images/room-1.jpeg"}
+      title="Contemplative Reptile"
+    />
+  );
+}
+
+export default function RoomCard(props: any) {
   const classes = useStyles();
 
   return (
-    <Link href="/rooms/family-deluxe" passHref>
+    <Link href={`/rooms/${props.room.fields.slug}`} passHref>
       <Badge
         classes={{ badge: classes.badge }}
+        style={{ display: "flex" }}
         badgeContent={
           <>
-            <Typography style={{ marginBottom: 0, lineHeight: "1.2" }}>
-              $400 <div style={{ fontSize: "0.75rem" }}>per night</div>
+            <Typography
+              style={{ marginBottom: 0, lineHeight: "1.2", fontSize: "0.9rem" }}
+            >
+              ${props.room.fields.price}{" "}
+              <div style={{ fontSize: "0.55rem" }}>per night</div>
             </Typography>
           </>
         }
@@ -45,15 +63,11 @@ export default function RoomCard() {
           horizontal: "left",
         }}
       >
-        <Card className={classes.root} elevation={2}>
+        <Card className={classes.root} elevation={0}>
           <CardActionArea>
             <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              height="180"
-              image="/assets/images/room-1.jpeg"
-              title="Contemplative Reptile"
-            />
+              image={props.room.fields.images[0].fields.file.url}
+            ></CardMedia>
             <CardContent style={{ padding: 6 }}>
               <Typography
                 gutterBottom
@@ -63,9 +77,10 @@ export default function RoomCard() {
                   textAlign: "center",
                   marginBottom: 0,
                   fontSize: "1rem",
+                  textTransform: "capitalize",
                 }}
               >
-                Double Deluxe
+                {props.room.fields.name}
               </Typography>
             </CardContent>
           </CardActionArea>

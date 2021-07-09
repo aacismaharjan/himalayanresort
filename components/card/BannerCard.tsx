@@ -29,7 +29,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BannerCard() {
+export interface BannerCardPropsI {
+  title: string;
+  description?: string;
+  href: string;
+  children: string;
+  [x: string]: any;
+}
+
+export default function BannerCard(props: BannerCardPropsI) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -46,7 +54,7 @@ export default function BannerCard() {
             textTransform: "capitalize",
           }}
         >
-          Luxurious Rooms
+          {props.title}
         </Typography>
 
         <Divider
@@ -58,22 +66,24 @@ export default function BannerCard() {
           }}
         />
 
-        <Typography
-          variant="body2"
-          component="h4"
-          style={{
-            fontSize: "1.2rem",
-            fontWeight: 400,
-            letterSpacing: ".2em",
-            textTransform: "capitalize",
-            marginBottom: "1.6rem",
-          }}
-        >
-          Deluxe Rooms Starting At $299
-        </Typography>
+        {props.description && (
+          <Typography
+            variant="body2"
+            component="h4"
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: 400,
+              letterSpacing: ".2em",
+              textTransform: "capitalize",
+              marginBottom: "1.6rem",
+            }}
+          >
+            {props.description}
+          </Typography>
+        )}
       </CardContent>
       <CardActions style={{ textAlign: "center", padding: 0 }}>
-        <Link href="/rooms" passHref>
+        <Link href={props.href} passHref>
           <Button
             variant="contained"
             color="primary"
@@ -83,7 +93,7 @@ export default function BannerCard() {
               margin: "auto",
             }}
           >
-            Our Rooms
+            {props.children}
           </Button>
         </Link>
       </CardActions>

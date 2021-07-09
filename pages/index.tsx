@@ -5,8 +5,10 @@ import RssFeedIcon from "@material-ui/icons/RssFeed";
 import ServiceCard from "../components/card/ServiceCard";
 import ServiceContainer from "../components/container/ServiceContainer";
 import RoomCard from "../components/card/RoomCard";
+import BannerContainer from "../components/container/BannerContainer";
+import { server } from "../config";
 
-export default function Home() {
+export default function Home(props: any) {
   return (
     <div>
       <Head>
@@ -19,19 +21,15 @@ export default function Home() {
       </Head>
 
       <main>
-        <Box
-          display="flex"
-          alignItems="center"
-          minHeight="100vh"
-          justifyContent="center"
-          style={{
-            backgroundImage: `url(${"/assets/images/defaultBcg.jpeg"})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <BannerCard />
-        </Box>
+        <BannerContainer fill>
+          <BannerCard
+            title="Luxurious Rooms"
+            description="Deluxe Rooms Starting At $299"
+            href="/rooms"
+          >
+            Our Rooms
+          </BannerCard>
+        </BannerContainer>
 
         <ServiceContainer title="Services" shade>
           <Grid container>
@@ -55,20 +53,30 @@ export default function Home() {
 
         <ServiceContainer title="Featured Room">
           <Grid container justify="center" alignItems="center" spacing={4}>
-            <Grid item md={4}>
-              <RoomCard />
-            </Grid>
-
-            <Grid item md={4}>
-              <RoomCard />
-            </Grid>
-
-            <Grid item md={4}>
-              <RoomCard />
-            </Grid>
+            {props.rooms &&
+              props.rooms.length > 0 &&
+              props.rooms.map((room: any, index: number) => (
+                <Grid item md={4} key={index}>
+                  <RoomCard room={room} />
+                </Grid>
+              ))}
           </Grid>
         </ServiceContainer>
       </main>
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/api/rooms`);
+  const rooms = await res.json();
+  const featuredRooms = rooms
+    .filter((room: any) => room.fields.featured)
+    .slice(0, 3);
+
+  return {
+    props: {
+      rooms: featuredRooms,
+    },
+  };
+};
